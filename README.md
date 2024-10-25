@@ -1,46 +1,46 @@
 # ePayco - Backend
 
-Este proyecto es una implementación de una billetera virtual. La aplicación permite registrar clientes, recargar saldo, realizar pagos con confirmación y consultar el saldo actual en la billetera.
+This project implements a virtual wallet. The application allows clients to register, top up balance, make payments with confirmation, and check the current wallet balance.
 
-## Descripción
+## Description
 
-El sistema simula el funcionamiento de una billetera virtual a través de servicios **SOAP** y **REST**. El servicio **SOAP** gestiona el acceso a la base de datos, mientras que el servicio **REST** funciona como un intermediario entre el cliente y el servicio SOAP, facilitando la comunicación y manteniendo la seguridad de los datos.
+The system simulates the functionality of a virtual wallet through **SOAP** and **REST** services. The **SOAP** service manages database access, while the **REST** service functions as an intermediary between the client and the SOAP service, facilitating communication and maintaining data security.
 
-## Funcionalidades
+## Features
 
-1. **Registro de Clientes**:  
-   Permite registrar un cliente enviando los siguientes datos obligatorios:
-   - Documento de identidad
-   - Nombre completo
+1. **Client Registration**:  
+   Allows registering a client by sending the following required data:
+   - Identity document
+   - Full name
    - Email
-   - Número de celular
+   - Phone number
 
-2. **Recarga de Billetera**:  
-   Permite cargar saldo a la billetera del cliente mediante:
-   - Documento de identidad
-   - Número de celular
-   - Valor de recarga
+2. **Wallet Top-Up**:  
+   Allows adding balance to the client’s wallet by providing:
+   - Identity document
+   - Phone number
+   - Top-up amount
 
-3. **Pago con Confirmación**:
-   - Se puede realizar una compra siempre y cuando el cliente tenga saldo suficiente.
-   - Se genera un token de 6 dígitos para confirmar la transacción, el cual se envía al email del cliente.
-   - La confirmación requiere el **ID de sesión** y el **token** para validar la transacción.
+3. **Payment with Confirmation**:
+   - A purchase can be made as long as the client has sufficient balance.
+   - A 6-digit token is generated to confirm the transaction, which is sent to the client’s email.
+   - Confirmation requires both the **session ID** and the **token** to validate the transaction.
 
-4. **Confirmación de Pago**:
-   - Valida el ID de sesión y el token enviados al cliente.
-   - Si son correctos, se descuenta el saldo y se genera una respuesta de éxito o fallo.
+4. **Payment Confirmation**:
+   - Validates the session ID and token sent to the client.
+   - If correct, the balance is deducted, and a success or failure response is generated.
 
-5. **Consulta de Saldo**:
-   - Permite consultar el saldo enviando el documento de identidad y el número de celular.
+5. **Balance Inquiry**:
+   - Allows checking the balance by sending the identity document and phone number.
 
-## Estructura de Respuestas
+## Response Structure
 
-Todas las respuestas de los servicios (SOAP y REST) siguen la misma estructura para facilitar el consumo y la integración:
+All responses from the services (SOAP and REST) follow the same structure to facilitate consumption and integration:
 
 ```json
 {
   "success": true | false,
-  "cod_error": "00" | "Código de error",
-  "message_error": "Mensaje explicativo",
-  "data": [ // Array u objeto con la información de respuesta ]
+  "cod_error": "00" | "Error code",
+  "message_error": "Descriptive error message",
+  "data": [ // Array or object with the response data ]
 }
